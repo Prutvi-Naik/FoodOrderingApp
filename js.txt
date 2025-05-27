@@ -1,0 +1,25 @@
+// const text = React.createElement("div", { id: "parent" }, [
+//   React.createElement("div", { id: "child", key: "child1" }, 
+//     React.createElement("h1", {}, "This is an H1 tag in first content")),
+//   React.createElement("div", { id: "child2", key: "child2" }, 
+//     React.createElement("h1", {}, "This is an H1 tag in second content")),
+//   React.createElement("footer", { id: "box", key: "footer" }, "box1")
+// ]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(text);
+
+const jsxtext = <h1 id="name">hello world..</h1>;
+// root.render(jsxtext);
+
+//react component
+const Learning =()=> <h1>Learning from  Namaste-react</h1>
+
+const ReactComponent = ()=>(
+   <div id="main">
+    <Learning/>
+    <h1>This is react component</h1>
+   </div>
+)
+root.render(<ReactComponent/>);
+
