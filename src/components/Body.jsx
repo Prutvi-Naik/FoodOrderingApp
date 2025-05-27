@@ -24,6 +24,9 @@ const Body = () => {
     const restaurantData = json?.data?.cards?.find(
       (card) => card?.card?.card?.id === "top_brands_for_you"
     )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    console.log(json?.data?.cards?.find(
+      (card) => card?.card?.card?.id === "top_brands_for_you"
+    )?.card?.card?.gridElements?.infoWithStyle?.restaurants)
 
    //  if (restaurantData) {
       setListOfRes(restaurantData);
