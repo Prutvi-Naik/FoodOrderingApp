@@ -35,7 +35,10 @@ const Body = () => {
   };
 
   const filterTopRated = () => {
-    const filteredList = listOfRes.filter((res) => res.info?.avgRating >= 4.4);
+    console.log("Click")
+    console.log(listOfRes)
+    const filteredList = listOfRes.filter((res) => res.info?.avgRating >= 4.0);
+    console.log(filteredList)
     setListOfRes(filteredList);
   };
   const onlineStatus = useNetwork();
