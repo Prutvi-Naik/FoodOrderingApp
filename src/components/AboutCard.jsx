@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../Util/UserContext";
 class AboutCard extends React.Component{
     constructor(props){
         super(props)
@@ -27,6 +28,11 @@ class AboutCard extends React.Component{
             <div className="A-card">
                <h1> Name :{name} </h1>
                <h2> Id:{id}</h2>
+               <UserContext.Consumer>
+                {({username})=>(
+                    <h1 className="font-bold">User : {username}</h1>
+                )}
+               </UserContext.Consumer>
                <h2> Mo. 4834949439</h2>
             </div>
         )

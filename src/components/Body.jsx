@@ -1,4 +1,4 @@
-import CardData from "./CardData";
+import CardData,{Suggestion} from "./CardData";
 // import resObj from "../Util/mockdata";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
@@ -9,6 +9,7 @@ const Body = () => {
   const [listOfRes, setListOfRes] = useState([]);
   const [FilterRes, setFilterRes] = useState([]);
   const [searchText,setsearchText]=useState("");
+ const SuggestedCard = Suggestion(CardData);
 
   useEffect(() => {
     fetchData();
@@ -24,9 +25,7 @@ const Body = () => {
     const restaurantData = json?.data?.cards?.find(
       (card) => card?.card?.card?.id === "top_brands_for_you"
     )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-    console.log(json?.data?.cards?.find(
-      (card) => card?.card?.card?.id === "top_brands_for_you"
-    )?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    
 
    //  if (restaurantData) {
       setListOfRes(restaurantData);
@@ -36,10 +35,8 @@ const Body = () => {
 
   const filterTopRated = () => {
     console.log("Click")
-    console.log(listOfRes)
-    const filteredList = listOfRes.filter((res) => res.info?.avgRating >= 4.0);
-    console.log(filteredList)
-    setListOfRes(filteredList);
+    const filteredList = listOfRes.filter((res) => res.info?.avgRating >= 4.5);
+    setFilterRes(filteredList);
   };
   const onlineStatus = useNetwork();
  if(onlineStatus === false)return<h1>Internet loss ! Chaeck Internet</h1>
@@ -55,7 +52,6 @@ const Body = () => {
             setsearchText(e.target.value)
          }} placeholder="Search Item"></input>
          <button className="border border border-black rounded-lg mx-2 px-2 bg-pink-500 capitalize" onClick={()=>{
-            console.log(searchText);
             const filterData = listOfRes.filter((resData)=>{
              return  resData.info.name.toLowerCase().includes(searchText.toLowerCase())
             }
@@ -69,7 +65,12 @@ const Body = () => {
       </div>
       <div className="flex flex-wrap h-full">
         {FilterRes.map((resData) => (
-         <Link to={"/resturant/"+resData.info.id}key={resData.info.id}> <CardData resData={resData} /></Link>
+         <Link to={"/resturant/"+resData.info.id}key={resData.info.id}>
+           {
+             resData.info.avgRating >= 4.3?<SuggestedCard resData={resData}/>:
+             <CardData resData={resData} />
+            }
+           </Link>
         ))}
       </div>
     </div>
